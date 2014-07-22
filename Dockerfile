@@ -22,6 +22,6 @@ RUN echo "deb http://www.ubnt.com/downloads/unifi/distros/deb/ubuntu ubuntu ubiq
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 VOLUME /usr/lib/unifi/data
-EXPOSE  22 8443 8080 27117
+EXPOSE  8443 8080 27117
 WORKDIR /usr/lib/unifi
 CMD ["/usr/bin/supervisord"]
