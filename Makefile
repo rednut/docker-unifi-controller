@@ -11,11 +11,16 @@ RVOL = /usr/lib/unifi/data
 
 .PHONY: all build test tag_latest release ssh
 
-all: build
+all: version_bump build tag_latest 
+
 
 build:
 	docker build -t="$(REPO):$(VERSION)" --rm --no-cache .
 
+
+
+version_bump:
+	@VERSION inc
 
 tag_latest:
 	docker tag $(REPO):$(VERSION) $(REPO):latest
