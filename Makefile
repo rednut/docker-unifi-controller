@@ -23,7 +23,7 @@ version_bump:
 	@VERSION inc
 
 tag_latest:
-	docker tag $(REPO):$(VERSION) $(REPO):latest
+	docker tag -f $(REPO):$(VERSION) $(REPO):latest
 
 release: test tag_latest
 	@if ! docker images $(REPO) | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(REPO) version $(VERSION) is not yet built. Please run 'make build'"; false; fi
@@ -31,10 +31,13 @@ release: test tag_latest
 	docker push $(REPO)
 	@echo "*** Don't forget to create a tag. git tag rel-$(VERSION) && git push origin rel-$(VERSION)"
 
+rm:
+	docker stop $(NAME) || echo "container not running yet" && docker rm $(NAME) || echo "no container count yet"
 
-run: 
+# 0.0.0:8080->8080/tcp, 0.0.0.0:8443->8443/tcp, 0.0.0.0:2222->22/tcp, 0.0.0.0:37117->27117/tcp
+run: rm 
 	docker run -d \
-                      -p 8080:8080 -p 8443:8443 -p 37117:27117 \
+                        -p 8443:8443 -p 37117:27117 -p 8080:8080 \
                         -v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data \
                         --name=$(NAME) \
 			$(REPO):latest

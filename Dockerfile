@@ -11,7 +11,7 @@ RUN 	mkdir -p /var/log/supervisor /usr/lib/unifi/data && \
   	touch /usr/lib/unifi/data/.unifidatadir
 
 RUN apt-get update -q -y
-RUN apt-get install -q -y supervisor apt-utils lsb-release curl wget rsync
+RUN apt-get install -q -y supervisor apt-utils lsb-release curl wget rsync util-linux
 
 # add ubiquity repo + key
 RUN echo "deb http://www.ubnt.com/downloads/unifi/distros/deb/ubuntu ubuntu ubiquiti" > /etc/apt/sources.list.d/ubiquity.list && \
