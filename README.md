@@ -37,7 +37,22 @@ run the the unifi controller.
 The unifi controller repo will provide the .debs. The package requires mongodb, so if we dont
 include 10gen's official repo it will use stock debian mongo instead (current state)
 
-The supervisor.conf is provided to configure supervisord which is used to launch the unifi contoller daemon.
+The supervisor.conf (example below) is provided to configure supervisord which is then used to launch the unifi contoller daemon:
+
+
+```
+[supervisord]
+nodaemon=true
+
+[program:unify]
+command=nice ionice -c2 /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java -Xmx256M -jar /usr/lib/unifi/lib/ace.jar start
+pidfile=/var/run/unifi/unifi.pid
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+#autorestart=true
+
+```
+
 
 ## run the container: launching the unifi controller daemon
 
