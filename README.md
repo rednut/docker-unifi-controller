@@ -31,6 +31,20 @@ make
 ```
 
 
+## run the container: launching the unifi controller daemon
+
+- to launch a container using the image created earlier:
+
+```
+    docker run -d \
+            -p 2222:22 -p 8080:8080 -p 8443:8443 -p 37117:27117 \
+            -v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data \
+            --name unifi rednut/unifi-controller
+```
+
+
+### notes on the make / build of the container
+
 The Makefile will provision the docker container image from the Dockerfile which will provision the image with upstream ubuntu:latest and include all the required dependencies to 
 run the the unifi controller.
 
@@ -56,7 +70,21 @@ stderr_logfile=/var/log/supervisor/%(program_name)s.log
 
 ## run the container: launching the unifi controller daemon
 
-- to launch a container using the image created earlier:
+### volumes for persistent data
+
+You can mount a local volume path into the container at `/usr/lib/unifi/data` by supplying to docker the `-v` argument like `-v <local_path>:<container_path>` or `-v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data`
+
+### ports
+
+To connunicate with the unifi controller you mapo various ports, eg:
+
+- 8080: non tls web ui
+- 8443: tls web ui
+- 27117: mongo 
+
+### command to run the unifi controller daemon
+
+To launch a container using the image created earlier:
 
 ``` 
 	docker run -d \
