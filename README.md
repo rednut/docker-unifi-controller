@@ -37,7 +37,7 @@ make
 
 ```
     docker run -d \
-            -p 2222:22 -p 8080:8080 -p 8443:8443 -p 37117:27117 \
+            -p 8080:8080 -p 8443:8443 -p 37117:27117 \
             -v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data \
             --name unifi rednut/unifi-controller
 ```
@@ -88,7 +88,7 @@ To launch a container using the image created earlier:
 
 ``` 
 	docker run -d \
-			-p 2222:22 -p 8080:8080 -p 8443:8443 -p 37117:27117 \
+			-p 8080:8080 -p 8443:8443 -p 37117:27117 \
 			-v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data \
 			--name unifi rednut/unifi-controller
 ```
