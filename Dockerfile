@@ -40,6 +40,6 @@ RUN \
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 VOLUME /usr/lib/unifi/data
-EXPOSE  8443 8080 27117
+EXPOSE  8443 8880 8080 27117
 WORKDIR /usr/lib/unifi
 CMD ["/usr/bin/supervisord"]
