@@ -131,6 +131,7 @@ so its usually better, after running the container to just stop/start it instead
 
 # Changelog
 
+- 20151113 merge pr to all guest portal ports
 - 20151026 fixup to use upstream ubuntu latest repo, make work with ubnt upstream changes: https://community.ubnt.com/t5/UniFi-Updates-Blog/UniFi-4-6-6-is-released/ba-p/1288816
 
 
