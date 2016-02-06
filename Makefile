@@ -30,10 +30,10 @@ release: test tag_latest
 rm:
 	docker stop $(NAME) || echo "container not running yet" && docker rm $(NAME) || echo "no container count yet"
 
-# 0.0.0:8080->8080/tcp, 0.0.0.0:8443->8443/tcp, 0.0.0.0:2222->22/tcp, 0.0.0.0:37117->27117/tcp
+# 0.0.0:8080->8080/tcp, 0.0.0.0:8443->8443/tcp, 0.0.0.0:8880->8880/tcp, 0.0.0.0:2222->22/tcp, 0.0.0.0:37117->27117/tcp
 run: rm 
 	docker run -d \
-                        -p 8443:8443 -p 37117:27117 -p 8080:8080 \
+                        -p 8443:8443 -p 37117:27117 -p 8080:8080 -p 8880:8880 \
                         -v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data \
                         --name=$(NAME) \
 			$(REPO):latest
