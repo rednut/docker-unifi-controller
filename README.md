@@ -37,7 +37,7 @@ make
 
 ```
     docker run -d \
-            -p 8080:8080 -p 8443:8443 -p 37117:27117 \
+            -p 8080:8080 -p 8443:8443 -p 8880:8880 -p 37117:27117 \
             -v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data \
             --name unifi rednut/unifi-controller
 ```
@@ -80,6 +80,7 @@ To connunicate with the unifi controller you mapo various ports, eg:
 
 - 8080: non tls web ui
 - 8443: tls web ui
+- 8880: guest login ui
 - 27117: mongo 
 
 ### command to run the unifi controller daemon
@@ -88,7 +89,7 @@ To launch a container using the image created earlier:
 
 ``` 
 	docker run -d \
-			-p 8080:8080 -p 8443:8443 -p 37117:27117 \
+			-p 8080:8080 -p 8443:8443 -p 8880:8880 -p 37117:27117 \
 			-v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data \
 			--name unifi rednut/unifi-controller
 ```
@@ -130,6 +131,7 @@ so its usually better, after running the container to just stop/start it instead
 
 # Changelog
 
+- 20151113 merge pr to all guest portal ports
 - 20151026 fixup to use upstream ubuntu latest repo, make work with ubnt upstream changes: https://community.ubnt.com/t5/UniFi-Updates-Blog/UniFi-4-6-6-is-released/ba-p/1288816
 
 
