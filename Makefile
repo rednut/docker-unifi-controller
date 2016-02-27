@@ -1,8 +1,9 @@
 USER = rednut
 NAME = unifi-controller
-REGISTRY = registry.rednut.net/
+#REGISTRY = registry.rednut.net/
+REGISTRY = 
 REPO = $(REGISTRY)$(USER)/$(NAME)
-VERSION = $(shell cat VERSION)
+VERSION = latest
 
 
 LVOL = /docker/unifi/data
@@ -12,7 +13,7 @@ RVOL = /usr/lib/unifi/data
 
 .PHONY: all build test tag_latest release ssh
 
-all: version_bump build tag_latest push
+all: build tag_latest push
 
 push: push_latest
 push_latest:

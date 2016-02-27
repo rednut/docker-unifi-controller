@@ -3,7 +3,7 @@ set +e
 set +x
 
 
-CONTAINER_NAME="unifi"
+CONTAINER_NAME="unifi-controller"
 
 
 
@@ -19,4 +19,4 @@ docker run -d \
 	-p 37117:27117 \
         -v /docker/unifi/data:/usr/lib/unifi/data \
         --name \
-          unifi rednut/unifi-controller
+          ${CONTAINER_NAME} rednut/unifi-controller
