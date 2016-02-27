@@ -4,7 +4,7 @@ set +x
 
 
 CONTAINER_NAME="unifi-controller"
-
+IMAGE_NAME="rednut/unifi-controller"
 
 
 docker stop $CONTAINER_NAME || echo "cannot stop a non running $CONTAINER_NAME"
@@ -19,4 +19,4 @@ docker run -d \
 	-p 37117:27117 \
         -v /docker/unifi/data:/usr/lib/unifi/data \
         --name \
-          ${CONTAINER_NAME} rednut/unifi-controller
+          ${CONTAINER_NAME} ${IMAGE_NAME}
