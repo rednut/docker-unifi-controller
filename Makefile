@@ -1,17 +1,22 @@
 USER = rednut
 NAME = unifi-controller
-REPO = $(USER)/$(NAME)
+REGISTRY = registry.rednut.net/
+REPO = $(REGISTRY)$(USER)/$(NAME)
 VERSION = $(shell cat VERSION)
 
 
-LVOL = /srv/data/apps/docker/unifi/data
+LVOL = /docker/unifi/data
 RVOL = /usr/lib/unifi/data
 
 
 
 .PHONY: all build test tag_latest release ssh
 
-all: version_bump build tag_latest 
+all: version_bump build tag_latest push
+
+push: push_latest
+push_latest:
+	docker push $(REPO):latest
 
 
 build:
@@ -37,8 +42,10 @@ rm:
 # 0.0.0:8080->8080/tcp, 0.0.0.0:8443->8443/tcp, 0.0.0.0:2222->22/tcp, 0.0.0.0:37117->27117/tcp
 run: rm 
 	docker run -d \
-                        -p 8443:8443 -p 37117:27117 -p 8080:8080 \
-                        -v /srv/data/apps/docker/unifi/data:/usr/lib/unifi/data \
+                        -p 8443:8443 \
+			-p 37117:27117 \
+			-p 8081:8080 \
+                        -v /docker/unifi/data:/usr/lib/unifi/data \
                         --name=$(NAME) \
 			$(REPO):latest
 
